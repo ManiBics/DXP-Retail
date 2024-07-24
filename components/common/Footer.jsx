@@ -31,7 +31,7 @@ export default function Footer(props) {
             width={162}
           />
 
-          <div data-sb-field-path="logoDescription" className="mt-12 text-xl">
+          <div data-sb-field-path="logoDescription" className="mt-12 text-xl" data-testid="logoDescription">
             {props.logoDescription}
           </div>
 
@@ -41,7 +41,7 @@ export default function Footer(props) {
                 className="p-2 mr-2 rounded-full border-solid border-2 border-white h-10 w-10 flex items-center justify-center cursor-pointer"
                 key={icon.id}
               >
-                <GetImage {...icon} />
+                <GetImage {...icon} data-testid="icon"/>
               </div>
             ))}
           </div>
@@ -58,6 +58,7 @@ export default function Footer(props) {
                   key={stateItem.id}
                   data-sb-object-id={stateItem.id}
                   className="flex items-center mt-3 hover:text-[#019881] cursor-pointer w-max"
+                  data-testid="statItem"
                 >
                   <div data-sb-field-path="title">{stateItem.title}</div>
                   <EastIcon fontSize="small" className="ml-3" />
@@ -68,7 +69,7 @@ export default function Footer(props) {
         ))}
       </div>
 
-      <div data-sb-field-path="disclaimer" className="text-sm w-3/6 mt-16">
+      <div data-sb-field-path="disclaimer" className="text-sm w-3/6 mt-16" data-testid="disclaimer">
         {props.disclaimer}
       </div>
 
@@ -76,7 +77,7 @@ export default function Footer(props) {
         <Divider />
       </div>
 
-      <div data-sb-field-path="copyRights" className="text-sm w-3/6">
+      <div data-sb-field-path="copyRights" className="text-sm w-3/6" data-testid="copyRights">
         {props.copyRights}
       </div>
     </div>
