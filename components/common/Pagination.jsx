@@ -43,12 +43,13 @@ export default function Pagination({
             onClick={handlePrevious}
             disabled={currentPage === 1}
             className="px-3 py-1 bg-gray-200 text-gray-800 rounded-md focus:outline-none"
+            data-testid="paginationButtons"
           >
             {PreviousText}
           </button>
         </li>
         {pageNumbers.map((number) => (
-          <li key={number} className="mx-1">
+          <li key={number} className="mx-1" data-testid="paginationNumbers">
             <button
               onClick={() => setPaginate(number)}
               className={`px-3 py-1 ${
@@ -69,6 +70,7 @@ export default function Pagination({
               currentPage === Math.ceil(totalProducts / productsPerPage)
             }
             className="px-3 py-1 bg-gray-200 text-gray-800 rounded-md focus:outline-none"
+            data-testid="paginationButtons"
           >
             {NextText}
           </button>
