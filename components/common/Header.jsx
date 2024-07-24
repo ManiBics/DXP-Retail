@@ -67,6 +67,7 @@ export default function Header(props) {
                     data-sb-field-path={`${menu.id}:title`}
                     className="font-medium text-md cursor-pointer"
                     key={menu.id}
+                    data-testid="menuLink"
                   >
                     {menu.title}
                   </div>
@@ -112,6 +113,7 @@ export default function Header(props) {
                           : "text-inherit"
                       }`}
                       onClick={() => handleNavigate(menu.url)}
+                      data-testid="subMenuLink"
                     >
                       {menu.title}
                     </div>
