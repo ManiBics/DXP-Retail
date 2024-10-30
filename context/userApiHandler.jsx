@@ -30,3 +30,16 @@ export const getCustomer = async (email) => {
     console.error("Error fetching the cart:", error);
   }
 };
+
+export const register = async (credential) => {
+  try {
+    const response = await fetch("/api/register", {
+      method: "POST",
+      body: JSON.stringify(credential),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error creating the customer:", error);
+  }
+};

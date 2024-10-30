@@ -24,21 +24,28 @@ const CartProvider = ({ children }) => {
     (async () => {
       const storedCartId = localStorage.getItem("cartId");
       showBackDrop();
-      if (user.id) {
-        if (storedCartId) {
-          const cartData = await getCart(storedCartId);
-          setCart(cartData);
-        } else {
-          const cartData = await createCart(user.id);
-          if (cartData.id) {
-            localStorage.setItem("cartId", cartData.id);
-            setCart(cartData);
-          }
-        }
+      if (user.id && storedCartId) {
+        const cartData = await getCart(storedCartId);
+        setCart(cartData);
       }
       hideBackDrop();
     })();
   }, [user]);
+
+  useEffect(() => {
+    const storedCartId = localStorage.getItem("cartId");
+    if (user.id && !cart && !storedCartId) createCartCT();
+  }, [cart, user]);
+
+  const createCartCT = async () => {
+    showBackDrop();
+    const cartData = await createCart(user.id);
+    if (cartData.id) {
+      localStorage.setItem("cartId", cartData.id);
+      setCart(cartData);
+    }
+    hideBackDrop();
+  };
 
   const addItem = async (product) => {
     showBackDrop();
@@ -83,10 +90,11 @@ const CartProvider = ({ children }) => {
     hideBackDrop();
   };
 
-  const createOrder = async () => {
+  const createOrder = async (setOrderId) => {
     showBackDrop();
     const updatedCart = await createOrderFromCart(cart.id, cart.version);
     if (updatedCart.id) {
+      setOrderId(updatedCart.id);
       setCart(null);
       localStorage.removeItem("cartId");
     }

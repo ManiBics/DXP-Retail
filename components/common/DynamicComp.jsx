@@ -18,6 +18,7 @@ import OrdersPage from "../RetailShop/OrdersPage";
 import OrderDetails from "../RetailShop/OrderDetails";
 import Login from "../RetailShop/Login";
 import TabContent from "../RetailShop/Home/TabContent";
+import Register from "../RetailShop/Register";
 
 const componentMap = {
   headerSection: RetailHeader,
@@ -32,6 +33,7 @@ const componentMap = {
   ordersContent: OrdersPage,
   orderDetailsContent: OrderDetails,
   dynamicImageAndCard: Login,
+  registrationPage: Register,
 };
 
 const DynamicComp = () => {

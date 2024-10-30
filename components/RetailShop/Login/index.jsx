@@ -5,14 +5,27 @@ import React, { useState } from "react";
 
 const Login = (props) => {
   const [credential, setCredential] = useState({ email: "", password: "" });
+  const [errors, setErrors] = useState({});
   const { signInHandler } = useUser();
 
-  const handleChage = (e) => {
+  const handleChange = (e) => {
     const { value, name } = e.target;
     setCredential((prev) => ({ ...prev, [name]: value }));
+    setErrors((prev) => ({ ...prev, [name]: "" })); // Clear error for the field being updated
   };
 
   const handleSubmit = () => {
+    // Validation for required fields
+    const newErrors = {};
+    if (!credential.email) newErrors.email = "Email is required.";
+    if (!credential.password) newErrors.password = "Password is required.";
+
+    // If there are errors, set error state and do not submit
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
     signInHandler(credential);
   };
 
@@ -48,8 +61,11 @@ const Login = (props) => {
                 name="email"
                 className="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
                 placeholder={props.emailPlaceholder}
-                onChange={handleChage}
+                onChange={handleChange}
               />
+              {errors.email && (
+                <p className="text-red-500 text-xs italic">{errors.email}</p>
+              )}
             </div>
             <div className="mb-6">
               <label
@@ -64,8 +80,11 @@ const Login = (props) => {
                 name="password"
                 className="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-3 px-4 text-gray-700 mb-3 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
                 placeholder={props.passwordPlaceholder}
-                onChange={handleChage}
+                onChange={handleChange}
               />
+              {errors.password && (
+                <p className="text-red-500 text-xs italic">{errors.password}</p>
+              )}
             </div>
             <div className="flex items-center justify-between">
               <Button onClick={handleSubmit} variant="contained">
@@ -73,9 +92,9 @@ const Login = (props) => {
               </Button>
               <Link
                 className="inline-block align-baseline font-bold text-sm text-[#1976d2] hover:underline"
-                href="#"
+                href="/register"
               >
-                {props.forgot}
+                Create Account
               </Link>
             </div>
           </form>

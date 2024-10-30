@@ -1,17 +1,18 @@
 import { useCart } from "@/context/CartContext";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 const OrderPlaced = (props) => {
   const router = useRouter();
+  const [orderId, setOrderId] = useState("");
   const { cart, createOrder } = useCart();
 
   useEffect(() => {
-    if (cart?.id) {
-      createOrder();
+    if (cart?.lineItems?.length) {
+      createOrder(setOrderId);
     }
-  }, [cart?.id]);
+  }, [cart]);
 
   return (
     <div className="flex flex-col items-center justify-center bg-white text-gray-800 my-10">
@@ -24,7 +25,8 @@ const OrderPlaced = (props) => {
         <h1 className="text-5xl font-bold text-[#1976d2] mb-4">
           {props.title}
         </h1>
-        <p className="text-lg mb-8">{props.description}</p>
+        <p className="text-lg">{props.description}</p>
+        <p className="text-lg mb-8"> {orderId ? `Order ID: ${orderId}` : ""}</p>
         <button
           className="bg-[#1976d2] text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 mb-6"
           onClick={() => {
