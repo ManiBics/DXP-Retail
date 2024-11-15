@@ -84,9 +84,9 @@ const CartProvider = ({ children }) => {
 
   const cancelOrder = async () => {
     showBackDrop();
-    setCart(null);
-    localStorage.removeItem("cartId");
     await removeCart(cart.id, cart.version);
+    localStorage.removeItem("cartId");
+    setCart(null);
     hideBackDrop();
   };
 

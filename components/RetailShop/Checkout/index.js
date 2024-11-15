@@ -1,10 +1,13 @@
 import { useBackDrop } from "@/context/BackDropContext";
+import { getLocale } from "@/utils";
 import { currency } from "@/utils/constant";
 import getStripe from "@/utils/stripe";
 import { Button } from "@mui/material";
+import { useParams } from "next/navigation";
 
 const Checkout = (props) => {
   const { showBackDrop, hideBackDrop } = useBackDrop();
+  const params = useParams();
 
   const handleSubmit = async () => {
     showBackDrop();
@@ -23,9 +26,14 @@ const Checkout = (props) => {
         },
       };
     });
+
+    const { locale } = getLocale(params?.slug);
     const res = await fetch("/api/checkout", {
       method: "POST",
-      body: JSON.stringify(line_items),
+      body: JSON.stringify({
+        line_items,
+        redirect_url: locale ? `/${locale}` : "",
+      }),
     });
 
     const checkoutSession = await res.json();

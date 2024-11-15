@@ -22,7 +22,7 @@ const OrderDetails = (props) => {
         <div>
           <Button
             onClick={() => {
-              router.push("/orderList");
+              router.push(props.backButton.url);
             }}
             size="small"
             variant="outlined"

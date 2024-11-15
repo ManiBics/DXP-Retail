@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Select from "@mui/joy/Select";
 import { optionFrom1ToN } from "@/utils";
 import Pagination from "@/components/common/Pagination";
+import { useCMSProducts } from "@/context/CMSProductContext";
 
 // ProductCard component
 const ProductCard = ({ product, addItem, isInCart, updateItemQuantity }) => {
@@ -147,7 +148,8 @@ const ProductListing = (props) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortType, setSortType] = useState("name");
 
-  const products = props.products;
+  // const products = props.products;
+  const { CMSproducts: products } = useCMSProducts();
   // Filter products by search query
   const filteredProducts = products.filter((product) =>
     product.productTitle1?.toLowerCase()?.includes(searchQuery.toLowerCase())

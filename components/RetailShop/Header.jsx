@@ -13,8 +13,6 @@ const RetailHeader = (props) => {
   const { logoutHandler } = useUser();
   const router = useRouter();
 
-  const paths = ["/", "/products", "/orderList"];
-
   return (
     <header
       data-sb-object-id={props.id}
@@ -27,40 +25,40 @@ const RetailHeader = (props) => {
           className="h-10"
           data-sb-object-id={props.logo?.id}
         />
-        <nav className="space-x-6">
-          {props.menuLinks
-            ?.filter((menu) => paths.includes(menu.url))
-            ?.map((item) =>
-              item.type === "languages" ? (
-                <LanguageSelection key={item.id} {...item} />
-              ) : (
-                <Link
-                  key={item.id}
-                  href={item.url || "#"}
-                  data-sb-field-path={`${item.id}:title`}
-                  className="text-gray-700 hover:text-blue-600"
-                >
-                  {item.title}
-                </Link>
-              )
-            )}
-          <Tooltip title="Cart">
-            <IconButton onClick={() => router.push("/cart")}>
-              <Badge color="primary" badgeContent={cart?.lineItems?.length}>
-                <ShoppingCartOutlinedIcon color="action" />
-              </Badge>
-            </IconButton>
-          </Tooltip>
+        <nav className="space-x-6 flex items-center">
+          {props.menuLinks?.map((item) =>
+            item.url.includes("cart") ? (
+              <Tooltip key={item.id} title="Cart">
+                <IconButton onClick={() => router.push(item.url)}>
+                  <Badge color="primary" badgeContent={cart?.lineItems?.length}>
+                    <ShoppingCartOutlinedIcon color="action" />
+                  </Badge>
+                </IconButton>
+              </Tooltip>
+            ) : (
+              <Link
+                key={item.id}
+                href={item.url || "#"}
+                data-sb-field-path={`${item.id}:title`}
+                className="text-gray-700 hover:text-blue-600"
+              >
+                {item.title}
+              </Link>
+            )
+          )}
+
           <Tooltip title="Logout">
             <IconButton
-              onClick={() => {
+              onClick={async () => {
+                await cancelOrder();
                 logoutHandler();
-                cancelOrder();
               }}
             >
               <LogoutIcon color="action" />
             </IconButton>
           </Tooltip>
+
+          <LanguageSelection {...props} />
         </nav>
       </div>
     </header>

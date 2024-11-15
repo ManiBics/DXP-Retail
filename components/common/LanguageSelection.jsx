@@ -20,17 +20,20 @@ export default function LanguageSelection(props) {
   const id = open ? "simple-popover" : undefined;
 
   const languageChange = (url) => {
-    const { locale, newSlug } = getLocale(params?.slug, url);
-    let path = "/" + newSlug?.join("/");
-    if (!locale) {
+    const { locale } = getLocale(params?.slug, url);
+    let path = "/" + (params?.slug ?? [""]).join("/");
+    if (locale) {
+      path = path.replace(`/${locale}`, url.length > 1 ? url : "");
+    } else {
       path = `${url}${path}`;
     }
+    if (!path) path = "/";
     router.push(path);
     handleClose();
   };
 
   const { locale } = getLocale(params?.slug);
-  const getLangIndex = props?.links?.findIndex((item) =>
+  const getLangIndex = props?.multilingual?.findIndex((item) =>
     item?.url?.includes(locale)
   );
   const langIndex = getLangIndex !== -1 ? getLangIndex : 0;
@@ -38,12 +41,12 @@ export default function LanguageSelection(props) {
   return (
     <div data-sb-object-id={props.id}>
       <div
-        data-sb-field-path={`${props.links[langIndex].id}:title`}
+        data-sb-field-path={`${props.multilingual[langIndex].id}:title`}
         aria-describedby={id}
         onClick={handleClick}
-        className="border-solid border-2 border-black text-sm font-medium px-1 cursor-pointer"
+        className="border-solid border-2 border-gray-500 text-sm font-medium px-1 cursor-pointer text-gray-700"
       >
-        {props.links[langIndex].title}
+        {props.multilingual[langIndex].title}
       </div>
       <Popover
         id={id}
@@ -55,14 +58,14 @@ export default function LanguageSelection(props) {
           horizontal: "left",
         }}
       >
-        {props.links.map((item, index) => (
+        {props.multilingual.map((item, index) => (
           <div
             data-sb-field-path={`${item.id}:title`}
             key={item.id}
-            className={`text-sm font-medium px-2 p-1 cursor-pointer ${
-              index === langIndex ? "bg-slate-200" : ""
+            className={`text-sm font-medium px-2 p-1 ${
+              index === langIndex ? "bg-slate-200" : "cursor-pointer"
             }`}
-            onClick={() => languageChange(item.url)}
+            onClick={() => index !== langIndex && languageChange(item.url)}
           >
             {item.title}
           </div>

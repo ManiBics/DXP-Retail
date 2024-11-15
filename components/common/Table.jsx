@@ -1,7 +1,12 @@
+import { getLocale } from "@/utils";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import React from "react";
 
 const Table = ({ rows, columns }) => {
+  const params = useParams();
+  const { locale } = getLocale(params?.slug);
+
   return (
     <div className="bg-white shadow overflow-hidden sm:rounded-lg ">
       <table className="min-w-full divide-y divide-gray-200 ">
@@ -35,7 +40,9 @@ const Table = ({ rows, columns }) => {
                       />
                     ) : column.key === "viewMore" ? (
                       <Link
-                        href={`/order-details?id=${row.id}`}
+                        href={`${locale ? `/${locale}` : ""}/order-details?id=${
+                          row.id
+                        }`}
                         className="text-[#1976d2] underline"
                       >
                         View more

@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { useBackDrop } from "./BackDropContext";
 import { useParams } from "next/navigation";
 import { getLocale } from "@/utils";
-import { getPageFromSlug } from "@/utils/content";
+import { getDataByContentType } from "@/utils/content";
 import { useUser } from "./UserContext";
 const Context = createContext();
 
@@ -18,9 +18,8 @@ const CMSProductProvider = ({ children }) => {
       if (user.id) {
         showBackDrop();
         const { locale = "en-US" } = getLocale(params?.slug);
-        const slug = "/product-listing";
-        const page = await getPageFromSlug(slug, locale, "productListing");
-        setCMSProducts(page.products);
+        const products = await getDataByContentType("ctproduct", locale);
+        setCMSProducts(products);
         hideBackDrop();
       }
     })();

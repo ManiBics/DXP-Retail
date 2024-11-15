@@ -1,7 +1,7 @@
 import { createClient } from "contentful";
 
 const PAGE_CONTENT_TYPE_ID = "page";
-const IS_DEV = process.env.NODE_ENV === "development";
+const IS_DEV = process.env.NODE_ENV !== "development";
 
 async function getEntries(content_type, queryParams) {
   const client = createClient({
@@ -51,6 +51,18 @@ export async function getPageFromSlug(slug, locale, pageContentType) {
     }
     if (!page) return { error: true };
     return mapEntry(page);
+  } catch (e) {
+    return { error: true };
+  }
+}
+
+export async function getDataByContentType(pageContentType, locale) {
+  try {
+    const { items } = await getEntries(pageContentType, {
+      locale,
+    });
+    if (!items) return { error: true };
+    return items.map(mapEntry);
   } catch (e) {
     return { error: true };
   }

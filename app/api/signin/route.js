@@ -1,11 +1,11 @@
 import fetchNode from "@/utils/nodeService";
+import { fetchCommerce } from "@/utils/commerce";
 
 export async function POST(request) {
   const body = await request.json();
-  const res = await fetchNode(`/signin`, {
+  const res = await fetchCommerce(`/login `, {
     method: "POST",
     body: JSON.stringify(body),
-    headers: { "Content-Type": "application/json" },
   });
   return Response.json(res);
 }

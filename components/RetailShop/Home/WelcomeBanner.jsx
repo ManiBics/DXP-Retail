@@ -29,7 +29,7 @@ const WelcomeBanner = (props) => {
           {props.button && (
             <button
               onClick={() => {
-                router.push("/products");
+                router.push(props.button.url);
               }}
               data-sb-field-path={`${props.button.id}:name`}
               className="mt-8 px-6 py-3 bg-[#1976d2] text-white rounded-full shadow-lg transform transition-transform hover:scale-105"
