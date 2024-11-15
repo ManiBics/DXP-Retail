@@ -19,6 +19,8 @@ import OrderDetails from "../RetailShop/OrderDetails";
 import Login from "../RetailShop/Login";
 import TabContent from "../RetailShop/Home/TabContent";
 import Register from "../RetailShop/Register";
+import VideoListCards from "../RetailShop/Video/page";
+import ArticleListCards from "../RetailShop/Article/page";
 
 const componentMap = {
   headerSection: RetailHeader,
@@ -34,6 +36,8 @@ const componentMap = {
   orderDetailsContent: OrderDetails,
   dynamicImageAndCard: Login,
   registrationPage: Register,
+  videopage: VideoListCards,
+  article: ArticleListCards,
 };
 
 const DynamicComp = () => {
@@ -56,17 +60,22 @@ const DynamicComp = () => {
       hideBackDrop();
     })();
   }, [params?.slug]);
+  const getUniq = {};
+
   return (
     <div>
       {data?.sections?.map((section, idx) => {
-        const Component = componentMap[section.type];
-        if (!Component)
-          return (
-            <div key={idx} className="text-red-500 text-center">
-              Component is missing
-            </div>
-          );
-        return <Component key={idx} {...section} />;
+        if (!getUniq[section.type]) {
+          getUniq[section.type] = true;
+          const Component = componentMap[section.type];
+          if (!Component)
+            return (
+              <div key={idx} className="text-red-500 text-center">
+                Component is missing
+              </div>
+            );
+          return <Component key={idx} {...section} />;
+        }
       })}
       {data.error && <NotFound />}
     </div>

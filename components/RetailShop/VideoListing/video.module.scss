@@ -1,0 +1,60 @@
+/* ArticleListCards.module.css */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .card-list {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .card-list:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-bodylist {
+    padding: 16px;
+    background-color: #fff;
+  }
+  
+
+  /* articles.module.css */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card-list {
+  transition: all 0.3s ease-in-out;
+}
+
+.card-list:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-bodylist {
+  padding: 16px;
+  background-color: #fff;
+}
+
+.card-bodylist h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.card-bodylist p {
+  font-size: 1rem;
+  color: #4a4a4a;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* number of lines to show */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-bodylist footer {
+  display: flex;
+  justify-content: center;
+}
