@@ -15,6 +15,7 @@ export const combineCMSData = (productListing, data) => {
         imageId: findProduct?.productImage?.id,
         sku: item?.variant?.sku,
         id: item.id,
+        currency: findProduct.currency,
       };
     });
     return lineItems;

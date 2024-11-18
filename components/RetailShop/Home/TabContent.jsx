@@ -56,6 +56,8 @@ export default function TabContent(props) {
         <Cart
           items={cartContentful}
           emptycartMessage={props.emptyMessageCart}
+          cartSummary={props.cartPageHome}
+          {...props}
         />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>

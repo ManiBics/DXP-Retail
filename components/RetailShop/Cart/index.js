@@ -54,7 +54,9 @@ export const Cart = ({ items, ...rest }) => {
                 {totalItems}
               </p>
               <p className="mt-2">
-                {rest.cartSummary?.productTotal || "Total:"} ${total.toFixed(2)}
+                {rest.cartSummary?.productTotal || "Total:"}{" "}
+                {rest.cartSummary?.currency}
+                {total.toFixed(2)}
               </p>
             </div>
           </div>

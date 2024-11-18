@@ -58,7 +58,10 @@ const CartItem = ({ item, updateItemQuantity, removeItem, isLastOrder }) => {
           </div>
         )}
 
-        <p className="text-lg font-semibold mt-auto">${item?.price}</p>
+        <p className="text-lg font-semibold mt-auto">
+          {item?.currency}
+          {item?.price}
+        </p>
       </div>
     </div>
   );

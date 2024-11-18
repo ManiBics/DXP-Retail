@@ -52,21 +52,13 @@ const OrdersPage = (props) => {
 
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
 
-  const columns = [
-    { title: "ORDER ID", key: "id" },
-    { title: "No. of order items", key: "nofitems" },
-    { title: "Total quantity of items", key: "quantity" },
-    { title: "Total Price", key: "totalPrice" },
-    { title: "Order status", key: "orderState" },
-    { title: "Date Created", key: "createdAt" },
-    { title: "Action", key: "viewMore" },
-  ];
+  const columns = props.columntable;
 
   return (
     <div className=" bg-white p-4">
       <div className=" mx-auto py-6 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center mb-4">
-          <h1 className="text-3xl font-bold text-gray-900">My Orders</h1>
+          <h1 className="text-3xl font-bold text-gray-900">{props.title}</h1>
           <input
             type="text"
             placeholder="Search orders"
