@@ -48,12 +48,15 @@ export default function TabContent(props) {
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label="My Cart" {...a11yProps(0)} />
-          <Tab label="My Last Order" {...a11yProps(1)} />
+          <Tab label={props.mycartText} {...a11yProps(0)} />
+          <Tab label={props.mylastOrder} {...a11yProps(1)} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        <Cart items={cartContentful} />
+        <Cart
+          items={cartContentful}
+          emptycartMessage={props.emptyMessageCart}
+        />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         {orderContentful?.lineItems?.length > 0 ? (
@@ -64,7 +67,7 @@ export default function TabContent(props) {
           </div>
         ) : (
           <p className="text-center text-gray-600 w-full">
-            Your Order is Empty
+            {props.EmptyMessagelastOrder}
           </p>
         )}
       </CustomTabPanel>

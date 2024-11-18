@@ -26,7 +26,9 @@ const OrderPlaced = (props) => {
           {props.title}
         </h1>
         <p className="text-lg">{props.description}</p>
-        <p className="text-lg mb-8"> {orderId ? `Order ID: ${orderId}` : ""}</p>
+        <p className="text-lg mb-8">
+          {orderId ? `${props.orderIdText}: ${orderId}` : ""}
+        </p>
         <button
           className="bg-[#1976d2] text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 mb-6"
           onClick={() => {

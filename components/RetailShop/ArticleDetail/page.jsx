@@ -34,7 +34,7 @@ function ArticleDetailPage() {
     };
 
     fetchProductDetails();
-  }, []);
+  }, [params?.slug]);
 
   if (!productDetail) {
     return <p className="lg:w-4/5 mx-auto pt-20 flex flex-wrap">Loading...</p>;

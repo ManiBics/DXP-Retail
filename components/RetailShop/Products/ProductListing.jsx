@@ -34,7 +34,7 @@ const ProductCard = ({ product, addItem, isInCart, updateItemQuantity }) => {
       <div className="p-4">
         <h3
           data-sb-field-path="productTitle1"
-          className="font-semibold text-lg mb-2"
+          className="font-semibold text-lg mb-2 line-clamp-1"
         >
           {product.productTitle1}
         </h3>

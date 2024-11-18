@@ -1,16 +1,19 @@
 "use client"; // This is a client component
 import React from "react";
-import { useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import ArticleListing from "../ArticleListing/page";
 import ArticleDetailPage from "../ArticleDetail/page";
 
 const ArticleListCards = () => {
-  const searchParams = useSearchParams();
-  const slug = searchParams.get("slug");
+  const pathname = usePathname();
 
   return (
     <div className="min-h-80">
-      {!slug ? <ArticleListing /> : <ArticleDetailPage />}
+      {!pathname.includes("article-detail") ? (
+        <ArticleListing />
+      ) : (
+        <ArticleDetailPage />
+      )}
     </div>
   );
 };

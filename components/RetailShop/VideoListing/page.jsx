@@ -26,7 +26,7 @@ const VideoListing = () => {
       setProContentItems(page);
       hideBackDrop();
     })();
-  }, []);
+  }, [locale]);
 
   return (
     <div className="container my-12 mx-auto px-4 md:px-12">
@@ -65,7 +65,7 @@ const VideoListing = () => {
               <CardActions>
                 <Link
                   href={`${locale ? `/${locale}` : ""}/video-detail?slug=${
-                    item?.slug
+                    item?.id
                   }`}
                   className="p-2"
                 >

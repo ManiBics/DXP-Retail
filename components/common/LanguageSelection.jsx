@@ -1,12 +1,14 @@
 import { useState } from "react";
 import Popover from "@mui/material/Popover";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { getLocale } from "../../utils";
 
 export default function LanguageSelection(props) {
   const [anchorEl, setAnchorEl] = useState(null);
   const params = useParams();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const searchQuery = searchParams.toString();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -28,7 +30,7 @@ export default function LanguageSelection(props) {
       path = `${url}${path}`;
     }
     if (!path) path = "/";
-    router.push(path);
+    router.push(searchQuery ? path + "?" + searchQuery : path);
     handleClose();
   };
 

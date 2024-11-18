@@ -26,7 +26,7 @@ const ArticleListing = (props) => {
       setProContentItems(page);
       hideBackDrop();
     })();
-  }, []);
+  }, [locale]);
 
   useEffect(() => {
     if (proContentItems.length > 0) {
@@ -78,7 +78,7 @@ const ArticleListing = (props) => {
                 <footer className="p-4">
                   <Link
                     href={`${locale ? `/${locale}` : ""}/article-detail?slug=${
-                      item?.slug
+                      item?.id
                     }`}
                   >
                     <Button

@@ -56,11 +56,11 @@ export async function getPageFromSlug(slug, locale, pageContentType) {
   }
 }
 
-export async function getDataByContentType(pageContentType, locale, slug) {
+export async function getDataByContentType(pageContentType, locale, contentId) {
   try {
     const { items } = await getEntries(pageContentType, {
       locale,
-      ...(slug ? { "fields.slug": slug } : {}),
+      ...(contentId ? { "sys.id": contentId } : {}),
     });
     if (!items) return { error: true };
     return items.map(mapEntry);

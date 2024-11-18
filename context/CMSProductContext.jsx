@@ -23,7 +23,7 @@ const CMSProductProvider = ({ children }) => {
         hideBackDrop();
       }
     })();
-  }, [user.id]);
+  }, [user.id, params?.slug]);
 
   return (
     <Context.Provider value={{ CMSproducts }}>{children}</Context.Provider>
