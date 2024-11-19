@@ -52,7 +52,7 @@ const ArticleListing = (props) => {
 
   return (
     <div className="container my-12 mx-auto px-4 md:px-12 ">
-      <h1 className="text-3xl mb-8">List of Articles</h1>
+      <h1 className="text-3xl mb-8">{props.parentTitle}</h1>
       <div className="flex flex-wrap -mx-1 lg:-mx-4">
         {proContentItems.map((item, index) => (
           <div
@@ -86,7 +86,7 @@ const ArticleListing = (props) => {
                       color="primary"
                       style={{ width: "100%" }}
                     >
-                      View Article
+                      {item.buttonText}
                     </Button>
                   </Link>
                 </footer>

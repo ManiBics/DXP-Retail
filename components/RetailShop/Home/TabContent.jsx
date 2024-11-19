@@ -6,6 +6,8 @@ import useCMSCart from "@/customHooks/useCMSCart";
 import { Cart } from "../Cart";
 import useCMSOrder from "@/customHooks/useCMSOrder";
 import CartItem from "../Cart/CartItem";
+import { useParams } from "next/navigation";
+import { getLocale } from "@/utils";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -39,6 +41,8 @@ export default function TabContent(props) {
 
   const { cartContentful } = useCMSCart();
   const { orderContentful } = useCMSOrder();
+  const params = useParams();
+  const { locale = "en-US" } = getLocale(params.slug);
 
   return (
     <Box sx={{ width: "100%", mt: 6, px: 3 }}>
@@ -64,7 +68,12 @@ export default function TabContent(props) {
         {orderContentful?.lineItems?.length > 0 ? (
           <div className="grid grid-cols-2 gap-6 p-4">
             {orderContentful.lineItems.map((item) => (
-              <CartItem key={item.id} item={item} isLastOrder={true} />
+              <CartItem
+                locale={locale}
+                key={item.id}
+                item={item}
+                isLastOrder={true}
+              />
             ))}
           </div>
         ) : (

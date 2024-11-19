@@ -74,7 +74,7 @@ const DynamicComp = () => {
                 Component is missing
               </div>
             );
-          return <Component key={idx} {...section} />;
+          return <Component key={idx} {...section} parentTitle={data.title} />;
         }
       })}
       {data.error && <NotFound />}

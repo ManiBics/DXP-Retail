@@ -4,15 +4,15 @@ import { usePathname } from "next/navigation";
 import VideoListing from "../VideoListing/page";
 import VideoDetailPage from "../VideoItems/page";
 
-const VideoListCards = () => {
+const VideoListCards = (props) => {
   const pathname = usePathname();
 
   return (
     <div className="min-h-80">
       {!pathname.includes("video-detail") ? (
-        <VideoListing />
+        <VideoListing {...props} />
       ) : (
-        <VideoDetailPage />
+        <VideoDetailPage {...props} />
       )}
     </div>
   );

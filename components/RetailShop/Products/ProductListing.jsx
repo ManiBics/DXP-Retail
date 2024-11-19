@@ -1,13 +1,20 @@
 import { useCart } from "@/context/CartContext";
 import { Button, Typography } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Select from "@mui/joy/Select";
-import { optionFrom1ToN } from "@/utils";
+import { getLocale, optionFrom1ToN, translatePrice } from "@/utils";
 import Pagination from "@/components/common/Pagination";
 import { useCMSProducts } from "@/context/CMSProductContext";
+import { useParams } from "next/navigation";
 
 // ProductCard component
-const ProductCard = ({ product, addItem, isInCart, updateItemQuantity }) => {
+const ProductCard = ({
+  product,
+  addItem,
+  isInCart,
+  updateItemQuantity,
+  locale,
+}) => {
   const inCart = isInCart(product.productTitle);
   const CartButton = inCart ? product.removeButton : product.cartButton;
   const quantity = inCart?.quantity || 1;
@@ -47,17 +54,13 @@ const ProductCard = ({ product, addItem, isInCart, updateItemQuantity }) => {
         <div className="flex justify-between items-center">
           <div>
             <span
-              className="text-gray-900 font-semibold text-lg"
-              data-sb-field-path="currency"
-            >
-              {product.currency}
-            </span>
-
-            <span
               data-sb-field-path="pricevalue"
               className="text-gray-900 font-semibold text-lg"
             >
-              {(quantity * product.pricevalue).toFixed(2)}
+              {translatePrice(
+                (quantity * product.pricevalue).toFixed(2),
+                locale
+              )}
             </span>
           </div>
 
@@ -97,7 +100,8 @@ const ProductCard = ({ product, addItem, isInCart, updateItemQuantity }) => {
 // ProductList component
 const ProductList = ({ products }) => {
   const { addItem, isInCart, updateItemQuantity } = useCart();
-
+  const params = useParams();
+  const { locale = "en-US" } = getLocale(params.slug);
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
       {products.map((product) => (
@@ -107,6 +111,7 @@ const ProductList = ({ products }) => {
           key={product.id}
           product={product}
           updateItemQuantity={updateItemQuantity}
+          locale={locale}
         />
       ))}
     </div>

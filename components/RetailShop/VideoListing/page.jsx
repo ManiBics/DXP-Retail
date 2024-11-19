@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography";
 import { useBackDrop } from "@/context/BackDropContext";
 import { getLocale } from "@/utils";
 
-const VideoListing = () => {
+const VideoListing = (props) => {
   const [proContentItems, setProContentItems] = useState([]);
   const { showBackDrop, hideBackDrop } = useBackDrop();
   const params = useParams();
@@ -30,7 +30,7 @@ const VideoListing = () => {
 
   return (
     <div className="container my-12 mx-auto px-4 md:px-12">
-      <h1 className="text-3xl mb-8">The Science of Listerine</h1>
+      <h1 className="text-3xl mb-8">{props.parentTitle}</h1>
       <div className="flex flex-wrap -mx-1 lg:-mx-4">
         {proContentItems.map((item, index) => (
           <div
@@ -74,7 +74,7 @@ const VideoListing = () => {
                     color="primary"
                     style={{ width: "100%" }}
                   >
-                    View More
+                    {item.buttonText}
                   </Button>
                 </Link>
               </CardActions>

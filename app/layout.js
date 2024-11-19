@@ -5,8 +5,8 @@ import ContextProviders from "@/components/common/ContextProviders";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Retail Ecommerce",
-  description: "Retail Ecommerce",
+  title: "Baby Shop",
+  description: "Baby Shop",
 };
 
 export default function RootLayout({ children }) {

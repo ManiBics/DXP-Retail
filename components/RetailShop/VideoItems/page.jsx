@@ -63,7 +63,7 @@ function VideoDetailPage() {
           {productDetail?.video_description && (
             <div className="lg:w-full w-full lg:pl-10 lg:py-6 mt-12 lg:mt-12 mb-0">
               <div className="font-bold text-[28px] mb-4">
-                Video Description
+                {productDetail.descriptionText}
               </div>
               <Typography>
                 {

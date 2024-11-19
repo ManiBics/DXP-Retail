@@ -1,9 +1,15 @@
 import { IconButton, Typography } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
-import { optionFrom1ToN } from "@/utils";
+import { optionFrom1ToN, translatePrice } from "@/utils";
 import { Select } from "@mui/joy";
 
-const CartItem = ({ item, updateItemQuantity, removeItem, isLastOrder }) => {
+const CartItem = ({
+  item,
+  updateItemQuantity,
+  removeItem,
+  isLastOrder,
+  locale,
+}) => {
   const quantity = item?.quantity || 1;
   const getOptions = optionFrom1ToN(
     item?.variant?.availability?.availableQuantity
@@ -59,8 +65,7 @@ const CartItem = ({ item, updateItemQuantity, removeItem, isLastOrder }) => {
         )}
 
         <p className="text-lg font-semibold mt-auto">
-          {item?.currency}
-          {item?.price}
+          {translatePrice(item?.price, locale)}
         </p>
       </div>
     </div>

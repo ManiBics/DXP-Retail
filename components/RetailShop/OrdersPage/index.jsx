@@ -3,6 +3,8 @@ import Pagination from "@/components/common/Pagination";
 import Table from "@/components/common/Table";
 import { useBackDrop } from "@/context/BackDropContext";
 import { useUser } from "@/context/UserContext";
+import { getLocale, translatePrice } from "@/utils";
+import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const OrdersPage = (props) => {
@@ -12,7 +14,8 @@ const OrdersPage = (props) => {
   const { user } = useUser();
   const { showBackDrop, hideBackDrop } = useBackDrop();
   const ordersPerPage = 5;
-
+  const params = useParams();
+  const { locale = "en-US" } = getLocale(params.slug);
   const filteredOrders = orders.filter((order) =>
     order.id.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -29,9 +32,10 @@ const OrdersPage = (props) => {
           id,
           quantity: lineItems.reduce((a, b) => a + b.quantity, 0),
           nofitems: lineItems.length,
-          totalPrice:
-            "$ " +
+          totalPrice: translatePrice(
             lineItems.reduce((a, b) => a + b.price.value.centAmount, 0) / 100,
+            locale
+          ),
           orderState,
           createdAt: new Date(createdAt).toDateString(),
         };
@@ -41,7 +45,7 @@ const OrdersPage = (props) => {
       hideBackDrop();
     };
     if (user.id) fetchApi();
-  }, [user.id]);
+  }, [user.id, locale]);
 
   const indexOfLastOrder = currentPage * ordersPerPage;
   const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;

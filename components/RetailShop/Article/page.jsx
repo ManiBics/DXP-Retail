@@ -4,15 +4,15 @@ import { usePathname } from "next/navigation";
 import ArticleListing from "../ArticleListing/page";
 import ArticleDetailPage from "../ArticleDetail/page";
 
-const ArticleListCards = () => {
+const ArticleListCards = (props) => {
   const pathname = usePathname();
 
   return (
     <div className="min-h-80">
       {!pathname.includes("article-detail") ? (
-        <ArticleListing />
+        <ArticleListing {...props} />
       ) : (
-        <ArticleDetailPage />
+        <ArticleDetailPage {...props} />
       )}
     </div>
   );

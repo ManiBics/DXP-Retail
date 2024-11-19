@@ -69,7 +69,7 @@ function ArticleDetailPage() {
               {productDetail?.shortDescription && (
                 <div className="bg-slate-200 rounded-xl shadow-md p-8 mt-8 h-fit">
                   <div className="font-bold text-[28px] mb-4">
-                    Article Description
+                    {productDetail.descTitledetail}
                   </div>
                   <Typography>{productDetail?.shortDescription}</Typography>
                 </div>
@@ -77,7 +77,7 @@ function ArticleDetailPage() {
               {productDetail?.accordion && (
                 <div className="p-8 bg-slate-200 rounded-xl shadow-md mt-8">
                   <div className="font-bold text-[28px] my-4">
-                    Additional Information
+                    {productDetail.infoHeaderText}
                   </div>
                   {productDetail?.accordion?.map((accordionItem) => (
                     <Accordion

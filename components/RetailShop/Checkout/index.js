@@ -1,6 +1,5 @@
 import { useBackDrop } from "@/context/BackDropContext";
-import { getLocale } from "@/utils";
-import { currency } from "@/utils/constant";
+import { getLocale, localeToCurrency } from "@/utils";
 import getStripe from "@/utils/stripe";
 import { Button } from "@mui/material";
 import { useParams } from "next/navigation";
@@ -8,6 +7,7 @@ import { useParams } from "next/navigation";
 const Checkout = (props) => {
   const { showBackDrop, hideBackDrop } = useBackDrop();
   const params = useParams();
+  const { locale } = getLocale(params?.slug);
 
   const handleSubmit = async () => {
     showBackDrop();
@@ -16,7 +16,7 @@ const Checkout = (props) => {
       return {
         quantity,
         price_data: {
-          currency,
+          currency: localeToCurrency(locale),
           unit_amount: Math.round(pricevalue * 100),
           product_data: {
             name,
@@ -27,12 +27,12 @@ const Checkout = (props) => {
       };
     });
 
-    const { locale } = getLocale(params?.slug);
     const res = await fetch("/api/checkout", {
       method: "POST",
       body: JSON.stringify({
         line_items,
         redirect_url: locale ? `/${locale}` : "",
+        locale: locale ?? "en-US",
       }),
     });
 

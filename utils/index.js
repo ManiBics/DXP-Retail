@@ -35,3 +35,30 @@ export function optionFrom1ToN(N) {
   }
   return result;
 }
+
+export const localeToCurrency = (locale) => {
+  return (
+    {
+      "en-US": "USD",
+      "en-GB": "GBP",
+      "ja-JP": "JPY",
+      "fr-FR": "EUR",
+      "fr-CA": "EUR",
+      "de-DE": "EUR",
+      // Add more locales as needed
+    }[locale] || "USD"
+  );
+};
+
+export function translatePrice(price, locale) {
+  const currency = localeToCurrency(locale);
+  if (!currency) {
+    throw new Error(`Currency not found for locale: ${locale}`);
+  }
+  const formatter = new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency: currency,
+  });
+
+  return formatter.format(price);
+}

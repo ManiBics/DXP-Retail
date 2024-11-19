@@ -1,10 +1,11 @@
 import { Button, Stack, Typography } from "@mui/material";
 import React from "react";
 import { useCart } from "@/context/CartContext";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import CartItem from "./CartItem";
 import Checkout from "../Checkout";
 import useCMSCart from "@/customHooks/useCMSCart";
+import { getLocale, translatePrice } from "@/utils";
 
 export const Cart = ({ items, ...rest }) => {
   const total = items?.reduce((sum, item) => sum + +item.price, 0);
@@ -17,6 +18,8 @@ export const Cart = ({ items, ...rest }) => {
   const hasOutOfStock = items?.some(
     (item) => !item?.variant?.availability?.availableQuantity > 0
   );
+  const params = useParams();
+  const { locale = "en-US" } = getLocale(params.slug);
 
   return (
     <div className="container mx-auto p-4 flex flex-col">
@@ -33,6 +36,7 @@ export const Cart = ({ items, ...rest }) => {
                 isInCart={isInCart}
                 key={item.id}
                 item={item}
+                locale={locale}
               />
             ))}
           </div>
@@ -55,8 +59,7 @@ export const Cart = ({ items, ...rest }) => {
               </p>
               <p className="mt-2">
                 {rest.cartSummary?.productTotal || "Total:"}{" "}
-                {rest.cartSummary?.currency}
-                {total.toFixed(2)}
+                {translatePrice(total.toFixed(2), locale)}
               </p>
             </div>
           </div>
