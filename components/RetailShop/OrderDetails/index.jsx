@@ -18,6 +18,13 @@ const OrderDetails = (props) => {
   );
   const params = useParams();
   const { locale = "en-US" } = getLocale(params.slug);
+
+  if (orderContentful?.lineItems) {
+    orderContentful?.lineItems.forEach((item) => {
+      item.translatedPrice = translatePrice(item.price, locale);
+    });
+  }
+
   return (
     <div className="bg-white p-8">
       <div className="flex justify-between">

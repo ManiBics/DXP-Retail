@@ -32,7 +32,7 @@ const Checkout = (props) => {
       body: JSON.stringify({
         line_items,
         redirect_url: locale ? `/${locale}` : "",
-        locale: locale ?? "en-US",
+        locale: locale ?? "en",
       }),
     });
 

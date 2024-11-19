@@ -34,6 +34,8 @@ export default function Pagination({
     }
   };
 
+  if (!totalProducts) return;
+
   return (
     <nav className="mt-10">
       <ul className="flex justify-center">
