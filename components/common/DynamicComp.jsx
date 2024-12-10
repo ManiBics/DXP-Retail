@@ -1,19 +1,13 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import { getPageFromSlug } from "../../utils/content";
 import NotFound from "../../components/common/NotFound";
-import { getLocale } from "../../utils";
 import RetailHeader from "@/components/RetailShop/Header";
 import CustomerSay from "@/components/RetailShop/Home/CustomerSay";
 import RetailFooter from "@/components/RetailShop/Footer";
 import WelcomeBanner from "@/components/RetailShop/Home/WelcomeBanner";
-import FeaturedProducts from "@/components/RetailShop/Home/FeaturedProducts";
 import ListingBanner from "@/components/RetailShop/Products/ListingBanner";
 import ProductListing from "@/components/RetailShop/Products/ProductListing";
 import ViewCart from "@/components/RetailShop/Cart";
 import ThankYouPage from "@/components/RetailShop/OrderPlaced";
-import { useParams } from "next/navigation";
-import { useBackDrop } from "@/context/BackDropContext";
 import OrdersPage from "../RetailShop/OrdersPage";
 import OrderDetails from "../RetailShop/OrderDetails";
 import Login from "../RetailShop/Login";
@@ -40,31 +34,12 @@ const componentMap = {
   article: ArticleListCards,
 };
 
-const DynamicComp = () => {
-  const params = useParams();
-  const [data, setData] = useState([]);
-  const { showBackDrop, hideBackDrop } = useBackDrop();
-
-  useEffect(() => {
-    (async () => {
-      showBackDrop();
-      const { locale = "en-US" } = getLocale(params?.slug);
-      const slug =
-        "/" +
-        (params?.slug ?? [""])
-          .filter((slug) => !slug.includes(locale))
-          .join("/")
-          .replace("index", "");
-      const page = await getPageFromSlug(slug, locale);
-      setData(page);
-      hideBackDrop();
-    })();
-  }, [params?.slug]);
+const DynamicComp = ({ pageData, params }) => {
   const getUniq = {};
 
   return (
     <div>
-      {data?.sections?.map((section, idx) => {
+      {pageData?.sections?.map((section, idx) => {
         if (!getUniq[section.type]) {
           getUniq[section.type] = true;
           const Component = componentMap[section.type];
@@ -74,10 +49,17 @@ const DynamicComp = () => {
                 Component is missing
               </div>
             );
-          return <Component key={idx} {...section} parentTitle={data.title} />;
+          return (
+            <Component
+              key={idx}
+              {...section}
+              parentTitle={pageData.title}
+              params={params}
+            />
+          );
         }
       })}
-      {data.error && <NotFound />}
+      {pageData.error && <NotFound />}
     </div>
   );
 };

@@ -1,3 +1,4 @@
+"use client";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useBackDrop } from "./BackDropContext";
 import { useParams } from "next/navigation";
@@ -12,18 +13,18 @@ const CMSProductProvider = ({ children }) => {
   const { user } = useUser();
 
   const params = useParams();
+  const { locale = "en-US" } = getLocale(params?.slug);
 
   useEffect(() => {
     (async () => {
       if (user.id) {
         showBackDrop();
-        const { locale = "en-US" } = getLocale(params?.slug);
         const products = await getDataByContentType("ctproduct", locale);
         setCMSProducts(products);
         hideBackDrop();
       }
     })();
-  }, [user.id, params?.slug]);
+  }, [user.id, locale]);
 
   return (
     <Context.Provider value={{ CMSproducts }}>{children}</Context.Provider>

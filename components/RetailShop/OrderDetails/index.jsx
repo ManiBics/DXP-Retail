@@ -1,3 +1,4 @@
+"use client";
 import Table from "@/components/common/Table";
 import { Button } from "@mui/material";
 import { useParams, useRouter, useSearchParams } from "next/navigation";

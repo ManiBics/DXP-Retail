@@ -1,3 +1,4 @@
+"use client";
 import { useCart } from "@/context/CartContext";
 import { Button, Typography } from "@mui/material";
 import React, { useState } from "react";

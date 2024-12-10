@@ -1,4 +1,4 @@
-// src/components/OrdersPage.js
+"use client";
 import Pagination from "@/components/common/Pagination";
 import Table from "@/components/common/Table";
 import { useBackDrop } from "@/context/BackDropContext";

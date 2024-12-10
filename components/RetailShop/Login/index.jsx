@@ -1,3 +1,4 @@
+"use client";
 import { useUser } from "@/context/UserContext";
 import { Button } from "@mui/material";
 import Link from "next/link";
