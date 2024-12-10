@@ -24,7 +24,7 @@ const CMSProductProvider = ({ children }) => {
         hideBackDrop();
       }
     })();
-  }, [user.id, locale]);
+  }, [user?.id, locale]);
 
   return (
     <Context.Provider value={{ CMSproducts }}>{children}</Context.Provider>

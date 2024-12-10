@@ -96,7 +96,7 @@ function ArticleDetailPage() {
                       </AccordionSummary>
                       <AccordionDetails>
                         <div className="text-sm">
-                          {accordionItem.accordion_description.content.map(
+                          {accordionItem.accordion_description?.content?.map(
                             (contentItem, index) => {
                               if (contentItem.nodeType === "unordered-list") {
                                 return (
