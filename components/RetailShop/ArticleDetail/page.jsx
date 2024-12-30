@@ -41,7 +41,10 @@ function ArticleDetailPage() {
   }
 
   return (
-    <section className="text-gray-700 body-font overflow-hidden bg-white">
+    <section
+      data-sb-object-id={productDetail.id}
+      className="text-gray-700 body-font overflow-hidden bg-white"
+    >
       <div className="container px-5 py-24 mx-auto">
         <div className="lg:w-4/5 mx-auto flex flex-wrap">
           <div className="lg:w-1/2 w-full relative flex">
@@ -52,6 +55,7 @@ function ArticleDetailPage() {
                   alt="Product"
                   className="object-cover object-center border w-auto rounded-lg shadow-2xl max-h-[250px]"
                   src={productDetail?.image[0]?.src}
+                  data-sb-object-id={productDetail?.image[0]?.id}
                 />
               </div>
             )}
@@ -59,7 +63,10 @@ function ArticleDetailPage() {
 
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 mb-0 self-center">
             <div className="mb-4">
-              <h1 className="title-font font-medium text-[34px] text-gray-900 mb-2">
+              <h1
+                data-sb-field-path="title"
+                className="title-font font-medium text-[34px] text-gray-900 mb-2"
+              >
                 {productDetail?.title}
               </h1>
             </div>
@@ -68,21 +75,30 @@ function ArticleDetailPage() {
             <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
               {productDetail?.shortDescription && (
                 <div className="bg-slate-200 rounded-xl shadow-md p-8 mt-8 h-fit">
-                  <div className="font-bold text-[28px] mb-4">
+                  <div
+                    data-sb-field-path="descTitledetail"
+                    className="font-bold text-[28px] mb-4"
+                  >
                     {productDetail.descTitledetail}
                   </div>
-                  <Typography>{productDetail?.shortDescription}</Typography>
+                  <Typography data-sb-field-path="shortDescription">
+                    {productDetail?.shortDescription}
+                  </Typography>
                 </div>
               )}
               {productDetail?.accordion && (
                 <div className="p-8 bg-slate-200 rounded-xl shadow-md mt-8">
-                  <div className="font-bold text-[28px] my-4">
+                  <div
+                    data-sb-field-path="infoHeaderText"
+                    className="font-bold text-[28px] my-4"
+                  >
                     {productDetail.infoHeaderText}
                   </div>
                   {productDetail?.accordion?.map((accordionItem) => (
                     <Accordion
                       className={styles.accordionbox}
                       key={accordionItem.id}
+                      data-sb-object-id={accordionItem.id}
                     >
                       <AccordionSummary
                         className=""
@@ -90,7 +106,10 @@ function ArticleDetailPage() {
                         aria-controls="panel1a-content"
                         id="panel1a-header"
                       >
-                        <Typography className="font-bold text-md my-2 text-indigo-900">
+                        <Typography
+                          data-sb-field-path="accordion_title"
+                          className="font-bold text-md my-2 text-indigo-900"
+                        >
                           {accordionItem.accordion_title}
                         </Typography>
                       </AccordionSummary>
@@ -106,7 +125,11 @@ function ArticleDetailPage() {
                                   >
                                     {contentItem.content.map(
                                       (listItem, idx) => (
-                                        <li className="flex mb-6" key={idx}>
+                                        <li
+                                          data-sb-object-id={listItem.id}
+                                          className="flex mb-6"
+                                          key={idx}
+                                        >
                                           <svg
                                             className="w-3.5 h-3.5 me-4 mt-1 text-green-500 dark:text-green-400 flex-shrink-0"
                                             aria-hidden="true"
@@ -116,10 +139,12 @@ function ArticleDetailPage() {
                                           >
                                             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                                           </svg>
-                                          {
-                                            listItem.content[0]?.content[0]
-                                              ?.value
-                                          }
+                                          <span data-sb-field-path=".content.0.content.0.value">
+                                            {
+                                              listItem.content[0]?.content[0]
+                                                ?.value
+                                            }
+                                          </span>
                                         </li>
                                       )
                                     )}

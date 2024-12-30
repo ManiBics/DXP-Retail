@@ -15,7 +15,10 @@ const CartItem = ({
     item?.variant?.availability?.availableQuantity
   );
   return (
-    <div className="flex justify-between items-center p-4 bg-white shadow-md rounded-md my-2">
+    <div
+      data-sb-object-id={item.CMSId}
+      className="flex justify-between items-center p-4 bg-white shadow-md rounded-md my-2"
+    >
       <div className="flex items-center">
         <img
           className="w-16 h-16 object-cover rounded-md"
@@ -24,8 +27,16 @@ const CartItem = ({
           data-sb-object-id={item.imageId}
         />
         <div className="ml-4">
-          <h2 className="text-lg font-semibold">{item.name}</h2>
-          <p className="text-sm text-gray-600 line-clamp-1">
+          <h2
+            data-sb-field-path="productTitle1"
+            className="text-lg font-semibold"
+          >
+            {item.name}
+          </h2>
+          <p
+            data-sb-field-path="productDescription"
+            className="text-sm text-gray-600 line-clamp-1"
+          >
             {item.description}
           </p>
           {!isLastOrder ? (

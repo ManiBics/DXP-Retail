@@ -46,15 +46,23 @@ export default function TabContent(props) {
   const { locale = "en-US" } = getLocale(params.slug);
 
   return (
-    <Box sx={{ width: "100%", mt: 6, px: 3 }}>
+    <Box data-sb-object-id={props.id} sx={{ width: "100%", mt: 6, px: 3 }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
           value={value}
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label={props.mycartText} {...a11yProps(0)} />
-          <Tab label={props.mylastOrder} {...a11yProps(1)} />
+          <Tab
+            data-sb-field-path="mycartText"
+            label={props.mycartText}
+            {...a11yProps(0)}
+          />
+          <Tab
+            data-sb-field-path="mylastOrder"
+            label={props.mylastOrder}
+            {...a11yProps(1)}
+          />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>

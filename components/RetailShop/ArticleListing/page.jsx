@@ -51,27 +51,43 @@ const ArticleListing = (props) => {
   }, [proContentItems]);
 
   return (
-    <div className="container my-12 mx-auto px-4 md:px-12 ">
-      <h1 className="text-3xl mb-8">{props.parentTitle}</h1>
+    <div
+      data-sb-object-id={props.id}
+      className="container my-12 mx-auto px-4 md:px-12 "
+    >
+      <h1
+        data-sb-field-path={`${props.parentId}:title`}
+        className="text-3xl mb-8"
+      >
+        {props.parentTitle}
+      </h1>
       <div className="flex flex-wrap -mx-1 lg:-mx-4">
         {proContentItems.map((item, index) => (
           <div
             className="my-1 px-1 w-full md:w-1/3 lg:my-4 lg:px-4 lg:w-1/3"
             key={index}
             ref={(el) => (cardsRef.current[index] = el)}
+            data-sb-object-id={item.id}
           >
             <article className="overflow-hidden rounded-lg shadow-lg card-list">
               <img
                 alt={item?.title || "Article Image"}
                 className="block h-72 w-full object-cover"
                 src={item?.image?.[0]?.src || "/path/to/placeholder/image.jpg"}
+                data-sb-object-id={item?.image?.[0]?.id}
               />
               <div className="card-bodylist">
                 <header className="p-4">
-                  <h2 className="text-lg font-bold mb-2 line-clamp-1">
+                  <h2
+                    data-sb-field-path="title"
+                    className="text-lg font-bold mb-2 line-clamp-1"
+                  >
                     {item?.title}
                   </h2>
-                  <p className="text-gray-700 mb-4 line-clamp-2">
+                  <p
+                    data-sb-field-path="shortDescription"
+                    className="text-gray-700 mb-4 line-clamp-2"
+                  >
                     {item?.shortDescription}
                   </p>
                 </header>
@@ -85,6 +101,7 @@ const ArticleListing = (props) => {
                       variant="contained"
                       color="primary"
                       style={{ width: "100%" }}
+                      data-sb-field-path="buttonText"
                     >
                       {item.buttonText}
                     </Button>

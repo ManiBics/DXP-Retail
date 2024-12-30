@@ -54,6 +54,7 @@ const DynamicComp = ({ pageData, params }) => {
               key={idx}
               {...section}
               parentTitle={pageData.title}
+              parentId={pageData.id}
               params={params}
             />
           );

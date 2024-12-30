@@ -17,6 +17,7 @@ const Table = ({ rows, columns }) => {
                 scope="col"
                 className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider"
                 key={column.title}
+                data-sb-field-path={`${column.id}:title`}
               >
                 {column.title}
               </th>
