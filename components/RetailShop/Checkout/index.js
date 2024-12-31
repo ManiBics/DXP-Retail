@@ -56,6 +56,7 @@ const Checkout = (props) => {
       onClick={handleSubmit}
       variant={props.theme || "contained"}
       color="success"
+      data-sb-field-path={`${props?.id}:label`}
     >
       {props.label || "Checkout"}
     </Button>

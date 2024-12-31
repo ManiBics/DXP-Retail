@@ -16,18 +16,27 @@ const OrderPlaced = (props) => {
   }, [cart]);
 
   return (
-    <div className="flex flex-col items-center justify-center bg-white text-gray-800 my-10">
+    <div
+      data-sb-object-id={props.id}
+      className="flex flex-col items-center justify-center bg-white text-gray-800 my-10"
+    >
       <div className="text-center">
         <img
           src={props.image.src}
           alt={props.image.alt}
+          data-sb-object-id={props?.image?.id}
           className="w-26 h-24 mx-auto mb-6"
         />
-        <h1 className="text-5xl font-bold text-[#1976d2] mb-4">
+        <h1
+          data-sb-field-path="title"
+          className="text-5xl font-bold text-[#1976d2] mb-4"
+        >
           {props.title}
         </h1>
-        <p className="text-lg">{props.description}</p>
-        <p className="text-lg mb-8">
+        <p data-sb-field-path="description" className="text-lg">
+          {props.description}
+        </p>
+        <p data-sb-field-path="orderIdText" className="text-lg mb-8">
           {orderId ? `${props.orderIdText}: ${orderId}` : ""}
         </p>
         <button
@@ -35,14 +44,16 @@ const OrderPlaced = (props) => {
           onClick={() => {
             if (props.button.url) router.push(props.button.url);
           }}
+          data-sb-field-path={`${props.button?.id}:label`}
         >
           {props.button.label}
         </button>
-        <p className="text-sm text-gray-600">
+        <p data-sb-field-path="hometitle" className="text-sm text-gray-600">
           {props.hometitle}{" "}
           <Link
             href={`mailto:${props.email}`}
             className="text-[#1976d2] underline"
+            data-sb-field-path="email"
           >
             {props.email}
           </Link>

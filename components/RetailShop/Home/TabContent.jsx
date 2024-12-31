@@ -86,7 +86,10 @@ export default function TabContent(props) {
             ))}
           </div>
         ) : (
-          <p className="text-center text-gray-600 w-full">
+          <p
+            data-sb-field-path="EmptyMessagelastOrder"
+            className="text-center text-gray-600 w-full"
+          >
             {props.EmptyMessagelastOrder}
           </p>
         )}

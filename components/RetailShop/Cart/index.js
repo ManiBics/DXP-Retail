@@ -23,10 +23,18 @@ export const Cart = ({ items, ...rest }) => {
   const { locale = "en-US" } = getLocale(params.slug);
 
   return (
-    <div className="container mx-auto p-4 flex flex-col">
+    <div
+      data-sb-object-id={rest.id}
+      className="container mx-auto p-4 flex flex-col"
+    >
       <div className="flex-grow">
         {rest.title && (
-          <h1 className="text-2xl font-bold mb-4 mt-2">{rest.title}</h1>
+          <h1
+            data-sb-field-path="title"
+            className="text-2xl font-bold mb-4 mt-2"
+          >
+            {rest.title}
+          </h1>
         )}
         {items?.length > 0 ? (
           <div className="grid grid-cols-2 gap-6">
@@ -42,23 +50,29 @@ export const Cart = ({ items, ...rest }) => {
             ))}
           </div>
         ) : (
-          <p className="text-center text-gray-600">
+          <p
+            data-sb-field-path="emptycartMessage"
+            className="text-center text-gray-600"
+          >
             {rest.emptycartMessage || "Your Cart is Empty"}
           </p>
         )}
       </div>
       {items?.length > 0 && (
         <div className="mt-4 p-4 bg-white  ">
-          <div className="flex  justify-end">
+          <div
+            data-sb-object-id={rest.cartSummary?.id}
+            className="flex  justify-end"
+          >
             <div>
-              <h2 className="text-xl font-semibold">
+              <h2 data-sb-field-path="title" className="text-xl font-semibold">
                 {rest.cartSummary?.title || "Cart Summary"}
               </h2>
-              <p className="mt-2">
+              <p data-sb-field-path="totalProducts" className="mt-2">
                 {rest.cartSummary?.totalProducts || "Total Products:"}{" "}
                 {totalItems}
               </p>
-              <p className="mt-2">
+              <p data-sb-field-path="productTotal" className="mt-2">
                 {rest.cartSummary?.productTotal || "Total:"}{" "}
                 {translatePrice(total.toFixed(2), locale)}
               </p>
@@ -82,6 +96,7 @@ export const Cart = ({ items, ...rest }) => {
               onClick={cancelOrder}
               variant={rest.cancelOrder?.theme || "outlined"}
               color="error"
+              data-sb-field-path={`${rest.cancelOrder?.id}:label`}
             >
               {rest.cancelOrder?.label || "Cancel Order"}
             </Button>
@@ -91,6 +106,7 @@ export const Cart = ({ items, ...rest }) => {
               }}
               variant={rest.continueShopping?.theme || "outlined"}
               color="primary"
+              data-sb-field-path={`${rest.continueShopping?.id}:label`}
             >
               {rest.continueShopping?.label || "Continue Shopping"}
             </Button>

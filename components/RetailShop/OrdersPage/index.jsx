@@ -59,10 +59,15 @@ const OrdersPage = (props) => {
   const columns = props.columntable;
 
   return (
-    <div className=" bg-white p-4">
+    <div data-sb-object-id={props.id} className=" bg-white p-4">
       <div className=" mx-auto py-6 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center mb-4">
-          <h1 className="text-3xl font-bold text-gray-900">{props.title}</h1>
+          <h1
+            data-sb-field-path="title"
+            className="text-3xl font-bold text-gray-900"
+          >
+            {props.title}
+          </h1>
           <input
             type="text"
             placeholder="Search orders"
